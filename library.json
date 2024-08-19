@@ -27,6 +27,13 @@
             "author": "hamo",
             "published_year": 2021,
             "is_borrowed": true
+        },
+        {
+            "id": 6,
+            "title": "boss",
+            "author": "m7md",
+            "published_year": 2000,
+            "is_borrowed": true
         }
     ],
     "borrowed_books": [
@@ -37,6 +44,10 @@
         {
             "book_id": 5,
             "user": "nader"
+        },
+        {
+            "book_id": 6,
+            "user": "ahmed"
         }
     ]
 }

@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Management System</title>
     <link rel="stylesheet" href="/static/style.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
     <h1>Library Management System</h1>
@@ -30,7 +44,18 @@
             <input type="number" id="book-id" placeholder="Book ID" required>
             <button type="submit">Get Book</button>
         </form>
-        <div id="book-details"></div>
+        <table id="book-details-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Published Year</th>
+                    <th>Borrowed By</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
 
         <!-- Borrow a Book Form -->
         <h2>Borrow a Book</h2>
@@ -44,7 +69,18 @@
         <!-- Show Borrowed Books -->
         <h2>Borrowed Books</h2>
         <button id="list-borrowed-books-btn">List Borrowed Books</button>
-        <ul id="borrowed-books-list"></ul>
+        <table id="borrowed-books-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Published Year</th>
+                    <th>Borrowed By</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
 
         <!-- Return a Book Form -->
         <h2>Return a Book</h2>

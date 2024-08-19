@@ -43,11 +43,23 @@ document.getElementById('get-book-form').addEventListener('submit', async functi
     const response = await fetch(`/books/${bookId}`);
     const book = await response.json();
 
-    const bookDetails = document.getElementById('book-details');
+    const bookDetailsTableBody = document.querySelector('#book-details-table tbody');
+    bookDetailsTableBody.innerHTML = '';
+
     if (response.ok) {
-        bookDetails.textContent = `ID: ${book.id}, Title: ${book.title}, Author: ${book.author}, Published Year: ${book.published_year}, Borrowed: ${book.is_borrowed}`;
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${book.id}</td>
+            <td>${book.title}</td>
+            <td>${book.author}</td>
+            <td>${book.published_year}</td>
+            <td>${book.is_borrowed ? 'Yes' : 'No'}</td>
+        `;
+        bookDetailsTableBody.appendChild(row);
     } else {
-        bookDetails.textContent = 'Book not found.';
+        const row = document.createElement('tr');
+        row.innerHTML = `<td colspan="5">Book not found.</td>`;
+        bookDetailsTableBody.appendChild(row);
     }
 });
 
@@ -83,13 +95,19 @@ document.getElementById('list-borrowed-books-btn').addEventListener('click', asy
     const response = await fetch('/book/borrowed');
     const data = await response.json();
 
-    const borrowedBooksList = document.getElementById('borrowed-books-list');
-    borrowedBooksList.innerHTML = '';
+    const borrowedBooksTableBody = document.querySelector('#borrowed-books-table tbody');
+    borrowedBooksTableBody.innerHTML = '';
 
     data.borrowed_books.forEach(book => {
-        const li = document.createElement('li');
-        li.textContent = `ID: ${book.id}, Title: ${book.title}, Author: ${book.author}, Published Year: ${book.published_year}, Borrowed By: ${book.user}`;
-        borrowedBooksList.appendChild(li);
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${book.id}</td>
+            <td>${book.title}</td>
+            <td>${book.author}</td>
+            <td>${book.published_year}</td>
+            <td>${book.user}</td>
+        `;
+        borrowedBooksTableBody.appendChild(row);
     });
 });
 
