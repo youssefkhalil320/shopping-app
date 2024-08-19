@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from .schemas import BookCreate, BookOut, BookBorrow
-from .models import Book
+from .models import Book, BookReturn, BookBorrow
 from .database import read_db, write_db
 from .crud import add_book, get_books, get_book_by_id, remove_book
 from .utils import get_next_book_id
@@ -90,3 +90,27 @@ def get_borrowed_books():
             })
 
     return {"borrowed_books": borrowed_books_info}
+
+@app.post("/books/return")
+def return_book(return_info: BookReturn):
+    db = read_db()
+    
+    # Find the book by ID
+    book = next((b for b in db["books"] if b["id"] == return_info.book_id), None)
+    
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+    
+    if not book["is_borrowed"]:
+        raise HTTPException(status_code=400, detail="Book was not borrowed")
+    
+    # Update the book's status to not borrowed
+    book["is_borrowed"] = False
+    
+    # Remove the book from the borrowed_books list
+    db["borrowed_books"] = [record for record in db["borrowed_books"] if record["book_id"] != return_info.book_id]
+    
+    # Save the updated database
+    write_db(db)
+    
+    return {"message": "Book returned successfully"}

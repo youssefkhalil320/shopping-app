@@ -93,3 +93,25 @@ document.getElementById('list-borrowed-books-btn').addEventListener('click', asy
     });
 });
 
+document.getElementById('return-book-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const bookId = document.getElementById('return-book-id').value;
+
+    const response = await fetch('/books/return', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ book_id: parseInt(bookId) })
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+        document.getElementById('return-status').innerText = result.message;
+    } else {
+        document.getElementById('return-status').innerText = result.detail || 'An error occurred';
+    }
+});
+
