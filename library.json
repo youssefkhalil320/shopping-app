@@ -1,4 +1,12 @@
 {
-    "books": [],
+    "books": [
+        {
+            "id": 1,
+            "title": "non",
+            "author": "tot",
+            "published_year": 2024,
+            "is_borrowed": false
+        }
+    ],
     "borrowed_books": []
 }

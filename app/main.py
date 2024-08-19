@@ -3,8 +3,19 @@ from .schemas import BookCreate, BookOut, BookBorrow
 from .models import Book
 from .crud import add_book, get_books, get_book_by_id, remove_book
 from .utils import get_next_book_id
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi import Request
 
 app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/", response_class=HTMLResponse)
+async def read_root(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 @app.post("/books/", response_model=BookOut)
 def create_book(book: BookCreate):
