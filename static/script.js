@@ -135,3 +135,4 @@ document.getElementById('delete-book-form').addEventListener('submit', async fun
         document.getElementById('delete-status').innerText = result.detail || 'An error occurred';
     }
 });
+
