@@ -25,13 +25,18 @@ document.getElementById('list-books-btn').addEventListener('click', async functi
     const response = await fetch('/books/');
     const books = await response.json();
 
-    const booksList = document.getElementById('books-list');
-    booksList.innerHTML = '';
+    const booksTableBody = document.querySelector('#books-table tbody');
+    booksTableBody.innerHTML = '';
 
     books.forEach(book => {
-        const li = document.createElement('li');
-        li.textContent = `${book.id}: ${book.title} by ${book.author} (${book.published_year})`;
-        booksList.appendChild(li);
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${book.id}</td>
+            <td>${book.title}</td>
+            <td>${book.author}</td>
+            <td>${book.published_year}</td>
+        `;
+        booksTableBody.appendChild(row);
     });
 });
 
