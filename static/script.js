@@ -115,3 +115,23 @@ document.getElementById('return-book-form').addEventListener('submit', async fun
     }
 });
 
+document.getElementById('delete-book-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const bookId = document.getElementById('delete-book-id').value;
+
+    const response = await fetch(`/delete_books/${bookId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+        document.getElementById('delete-status').innerText = result.message;
+    } else {
+        document.getElementById('delete-status').innerText = result.detail || 'An error occurred';
+    }
+});

@@ -8,13 +8,6 @@
             "is_borrowed": false
         },
         {
-            "id": 2,
-            "title": "life",
-            "author": "mo",
-            "published_year": 2025,
-            "is_borrowed": true
-        },
-        {
             "id": 3,
             "title": "ff",
             "author": "ff",
@@ -37,10 +30,6 @@
         }
     ],
     "borrowed_books": [
-        {
-            "book_id": 2,
-            "user": "Joh"
-        },
         {
             "book_id": 4,
             "user": "youssef"

@@ -45,7 +45,7 @@
         <h2>Borrowed Books</h2>
         <button id="list-borrowed-books-btn">List Borrowed Books</button>
         <ul id="borrowed-books-list"></ul>
-        
+
         <!-- Return a Book Form -->
         <h2>Return a Book</h2>
         <form id="return-book-form">
@@ -53,6 +53,15 @@
             <button type="submit">Return Book</button>
         </form>
         <div id="return-status"></div>
+
+        <!-- Delete a Book Form -->
+        <h2>Delete a Book</h2>
+        <form id="delete-book-form">
+            <input type="number" id="delete-book-id" placeholder="Book ID" required>
+            <button type="submit">Delete Book</button>
+        </form>
+        <div id="delete-status"></div>
+
     </div>
 
     <script src="/static/script.js"></script>

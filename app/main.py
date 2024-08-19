@@ -114,3 +114,25 @@ def return_book(return_info: BookReturn):
     write_db(db)
     
     return {"message": "Book returned successfully"}
+
+
+@app.delete("/delete_books/{book_id}")
+def delete_book(book_id: int):
+    db = read_db()
+    
+    # Find the book by ID
+    book = next((b for b in db["books"] if b["id"] == book_id), None)
+    
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+    
+    # Remove the book from the books list
+    db["books"] = [b for b in db["books"] if b["id"] != book_id]
+    
+    # Also remove the book from the borrowed_books list if it was borrowed
+    db["borrowed_books"] = [record for record in db["borrowed_books"] if record["book_id"] != book_id]
+    
+    # Save the updated database
+    write_db(db)
+    
+    return {"message": "Book deleted successfully"}
