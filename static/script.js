@@ -50,3 +50,46 @@ document.getElementById('get-book-form').addEventListener('submit', async functi
         bookDetails.textContent = 'Book not found.';
     }
 });
+
+document.getElementById('borrow-book-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const bookId = document.getElementById('borrow-book-id').value;
+    const user = document.getElementById('borrow-user').value;
+
+    try {
+        const response = await fetch('/books/borrow', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ book_id: parseInt(bookId), user: user })
+        });
+
+        const result = await response.json();
+
+        const borrowStatus = document.getElementById('borrow-status');
+        if (response.ok) {
+            borrowStatus.innerText = result.message;
+        } else {
+            borrowStatus.innerText = result.detail || 'An error occurred';
+        }
+    } catch (error) {
+        document.getElementById('borrow-status').innerText = 'Network error: ' + error.message;
+    }
+});
+
+document.getElementById('list-borrowed-books-btn').addEventListener('click', async function() {
+    const response = await fetch('/book/borrowed');
+    const data = await response.json();
+
+    const borrowedBooksList = document.getElementById('borrowed-books-list');
+    borrowedBooksList.innerHTML = '';
+
+    data.borrowed_books.forEach(book => {
+        const li = document.createElement('li');
+        li.textContent = `ID: ${book.id}, Title: ${book.title}, Author: ${book.author}, Published Year: ${book.published_year}, Borrowed By: ${book.user}`;
+        borrowedBooksList.appendChild(li);
+    });
+});
+

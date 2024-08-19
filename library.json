@@ -5,8 +5,46 @@
             "title": "non",
             "author": "tot",
             "published_year": 2024,
+            "is_borrowed": true
+        },
+        {
+            "id": 2,
+            "title": "life",
+            "author": "mo",
+            "published_year": 2025,
+            "is_borrowed": true
+        },
+        {
+            "id": 3,
+            "title": "ff",
+            "author": "ff",
+            "published_year": 20222,
             "is_borrowed": false
+        },
+        {
+            "id": 4,
+            "title": "fff",
+            "author": "2024",
+            "published_year": 2022,
+            "is_borrowed": true
         }
     ],
-    "borrowed_books": []
+    "borrowed_books": [
+        {
+            "book_id": 1,
+            "user": "John Doe"
+        },
+        {
+            "book_id": 2,
+            "user": "Joh"
+        },
+        {
+            "book_id": 1,
+            "user": "fff"
+        },
+        {
+            "book_id": 4,
+            "user": "youssef"
+        }
+    ]
 }

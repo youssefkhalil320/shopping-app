@@ -10,6 +10,7 @@
     <h1>Library Management System</h1>
 
     <div class="container">
+        <!-- Add a New Book Form -->
         <h2>Add a New Book</h2>
         <form id="add-book-form">
             <input type="text" id="title" placeholder="Title" required>
@@ -18,16 +19,32 @@
             <button type="submit">Add Book</button>
         </form>
 
+        <!-- List Books -->
         <h2>All Books</h2>
         <button id="list-books-btn">List Books</button>
         <ul id="books-list"></ul>
 
+        <!-- Get Book by ID Form -->
         <h2>Get Book by ID</h2>
         <form id="get-book-form">
             <input type="number" id="book-id" placeholder="Book ID" required>
             <button type="submit">Get Book</button>
         </form>
         <div id="book-details"></div>
+
+        <!-- Borrow a Book Form -->
+        <h2>Borrow a Book</h2>
+        <form id="borrow-book-form">
+            <input type="number" id="borrow-book-id" placeholder="Book ID" required>
+            <input type="text" id="borrow-user" placeholder="Your Name" required>
+            <button type="submit">Borrow Book</button>
+        </form>
+        <div id="borrow-status"></div>
+
+        <!-- Show Borrowed Books -->
+        <h2>Borrowed Books</h2>
+        <button id="list-borrowed-books-btn">List Borrowed Books</button>
+        <ul id="borrowed-books-list"></ul>
     </div>
 
     <script src="/static/script.js"></script>
