@@ -1,15 +1,24 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends, Request
+from fastapi.security import OAuth2PasswordBearer
 from .schemas import BookCreate, BookOut, BookBorrow
 from .models import Book, BookReturn, BookBorrow
 from .database import read_db, write_db
 from .crud import add_book, get_books, get_book_by_id, remove_book
 from .utils import get_next_book_id
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi import Request
 
 app = FastAPI()
+
+# In-memory storage for sessions (for demonstration purposes)
+sessions = {}
+# Define roles and users (for demonstration purposes)
+users = {
+    "admin": {"password": "adminpass", "role": "admin"},
+    "user": {"password": "userpass", "role": "user"},
+}
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
